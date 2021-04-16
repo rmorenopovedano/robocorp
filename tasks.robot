@@ -12,6 +12,7 @@ Library           RPA.Excel.Files
 Library           RPA.FileSystem
 Library           RPA.HTTP
 Library           RPA.PDF
+Library           RPA.Robocloud.Secrets
 
 *** Keywords ***
 Open The Intranet Website
@@ -19,8 +20,9 @@ Open The Intranet Website
 
 *** Keywords ***
 Log In
-    Input Text    id:username    maria
-    Input Password    id:password    thoushallnotpass
+    ${secret}=    Get Secret    robotsparebin
+    Input Text    id:username    ${secret}[username]
+    Input Password    id:password    ${secret}[password]
     Submit Form
     Wait Until Page Contains Element    id:sales-form
 
